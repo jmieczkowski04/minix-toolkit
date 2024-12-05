@@ -18,7 +18,7 @@ MINIX_MOUNT_CMD='mount -t minix -o loop,offset=1483776'									# Polecenie mont
 
 MINIX_CUR_NAME='minix203.img.cur'														# Nazwa obrazu roboczego
 MINIX_SOURCE_IMAGE_NAME="minix203.img.ori"												# Nazwa obrazu źródłowego - to ten, który będzie czystym minixem
-MINIX_SOURCE_URL='http://www.ia.pw.edu.pl/~tkruk/edu/soi.b/lab/minix/minix203.img'		# Skąd pobieramy czysty obraz?
+MINIX_SOURCE_URL='https://www.ia.pw.edu.pl/~tkruk/edu/soi/lab/minix/minix203.img'		# Skąd pobieramy czysty obraz?
 MINIX_USR_LOCAL_DIR='minix_usr'															# Katalog roboczy pod którym będzie montowany minix
 
 
