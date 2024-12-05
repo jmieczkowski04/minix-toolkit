@@ -163,6 +163,7 @@ do
 	echo 	"== 4) Przywróć poprzednią wersję"
 	echo 	"== 5) Wyeksportuj zmienione pliki do archiwum"
 	echo 	"== 6) Przenieś aktualny obraz na nośnik zewnętrzny"
+	echo 	"== 7) Uruchom visual studio code"
 	echo 	"== g) Uruchom gedit jako root"
 	echo 	"== q) Zakończ pracę, idę spać."
 	echo -n	"== Wybór: "; read CHOICE
@@ -297,6 +298,10 @@ do
 				
 				break
 			done
+			
+			;;
+		"7")
+			sudo runuser -u $SUDO_USER -- code -w $MINIX_USR_LOCAL_DIR
 			
 			;;
 		"g")
