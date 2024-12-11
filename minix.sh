@@ -21,7 +21,7 @@ MINIX_SOURCE_IMAGE_NAME="minix203.img.ori"												# Nazwa obrazu źródłowe
 MINIX_SOURCE_URL='https://www.ia.pw.edu.pl/~tkruk/edu/soi/lab/minix/minix203.img'		# Skąd pobieramy czysty obraz?
 MINIX_USR_LOCAL_DIR='minix_usr'															# Katalog roboczy pod którym będzie montowany minix
 
-
+EDITOR='gedit'
 
 # Sprawdź w pierwszym kroku, czy jesteśmy rootem.
 # Bezwzględnie potrzebujemy tego do mount itp
@@ -163,8 +163,7 @@ do
 	echo 	"== 4) Przywróć poprzednią wersję"
 	echo 	"== 5) Wyeksportuj zmienione pliki do archiwum"
 	echo 	"== 6) Przenieś aktualny obraz na nośnik zewnętrzny"
-	echo 	"== 7) Uruchom visual studio code"
-	echo 	"== g) Uruchom gedit jako root"
+	echo 	"== 7) Uruchom $EDITOR"
 	echo 	"== q) Zakończ pracę, idę spać."
 	echo -n	"== Wybór: "; read CHOICE
 	echo 	"==================================================="
@@ -301,12 +300,18 @@ do
 			
 			;;
 		"7")
-			sudo runuser -u $SUDO_USER -- code -w $MINIX_USR_LOCAL_DIR
-			
-			;;
-		"g")
-			gedit &
-			echo "Chwileczkę..."
+			if test "$EDITOR" == "code" # any other ide
+			then
+				sudo runuser -u $SUDO_USER -- $EDITOR -w $MINIX_USR_LOCAL_DIR
+			else
+				echo -n "Podaj ścieżkę względną do pliku który chcesz edytować jako root: $MINIX_USR_LOCAL_DIR/"; read TARGET_NAME
+				if test "$TARGET_NAME" == ""
+				then
+					$EDITOR
+				else
+					$EDITOR "$MINIX_USR_LOCAL_DIR/$TARGET_NAME"
+				fi
+			fi
 			;;
 		"q")
 			echo "-> No elo."
@@ -316,3 +321,4 @@ do
 done
 
 umount_image
+
